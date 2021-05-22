@@ -60,6 +60,7 @@ client.on('message', msg => {
 	}
 
 	if (sadWords.some(word => msg.content.includes(word))) {
+    message.react('😥');
 		db.get('encouragements').then(encouragements => {
 			const encouragement =
 			  encouragements[Math.floor(Math.random() * encouragements.length)];
