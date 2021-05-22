@@ -56,11 +56,12 @@ client.on('message', msg => {
 	if (msg.author.bot) return;
 
 	if (msg.content === '!inspire') {
+    msg.react('❤');
 		quotes().then(quote => msg.channel.send(quote));
 	}
 
 	if (sadWords.some(word => msg.content.includes(word))) {
-    message.react('😥');
+    msg.react('😥');
 		db.get('encouragements').then(encouragements => {
 			const encouragement =
 			  encouragements[Math.floor(Math.random() * encouragements.length)];
@@ -69,18 +70,23 @@ client.on('message', msg => {
 	}
 
   if(msg.content.startsWith("!Hello")){
+    msg.react('👋');
     msg.reply("Hi, my gorgeous friend! type ' !inspire ' for a wonderful quote")
   }
   if(msg.content.startsWith("!hello")){
+    msg.react('👋');
     msg.reply("Hi, my gorgeous friend! type ' !inspire ' for a wonderful quote")
   }
   if(msg.content.startsWith("!hi")){
+    msg.react('👋');
     msg.reply("Hi, my gorgeous friend! type ' !inspire ' for a wonderful quote")
   }
   if(msg.content.startsWith("!Hi")){
+    msg.react('👋');
     msg.reply("Hi, my gorgeous friend! type ' !inspire ' for a wonderful quote")
   }
   if(msg.content.startsWith("!hey")){
+    msg.react('👋');
     msg.reply("Hi, my gorgeous friend! type ' !inspire ' for a wonderful quote")
   }
 
