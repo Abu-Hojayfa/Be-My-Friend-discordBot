@@ -68,19 +68,19 @@ client.on('message', msg => {
 		});
 	}
 
-  if(msg.content.startsWith("Hello")){
+  if(msg.content.startsWith("!Hello")){
     msg.reply("Hi, my gorgeous friend! type ' !inspire ' for a wonderful quote")
   }
-  if(msg.content.startsWith("hello")){
+  if(msg.content.startsWith("!hello")){
     msg.reply("Hi, my gorgeous friend! type ' !inspire ' for a wonderful quote")
   }
-  if(msg.content.startsWith("hi")){
+  if(msg.content.startsWith("!hi")){
     msg.reply("Hi, my gorgeous friend! type ' !inspire ' for a wonderful quote")
   }
-  if(msg.content.startsWith("Hi")){
+  if(msg.content.startsWith("!Hi")){
     msg.reply("Hi, my gorgeous friend! type ' !inspire ' for a wonderful quote")
   }
-  if(msg.content.startsWith("hey")){
+  if(msg.content.startsWith("!hey")){
     msg.reply("Hi, my gorgeous friend! type ' !inspire ' for a wonderful quote")
   }
 
