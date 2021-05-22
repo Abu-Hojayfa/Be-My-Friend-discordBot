@@ -70,23 +70,18 @@ client.on('message', msg => {
 	}
 
   if(msg.content.startsWith("!Hello")){
-    msg.react('❤');
     msg.reply("Hi, my gorgeous friend! type ' !inspire ' for a wonderful quote")
   }
   if(msg.content.startsWith("!hello")){
-    msg.react('❤');
     msg.reply("Hi, my gorgeous friend! type ' !inspire ' for a wonderful quote")
   }
   if(msg.content.startsWith("!hi")){
-    msg.react('❤');
     msg.reply("Hi, my gorgeous friend! type ' !inspire ' for a wonderful quote")
   }
   if(msg.content.startsWith("!Hi")){
-    msg.react('❤');
     msg.reply("Hi, my gorgeous friend! type ' !inspire ' for a wonderful quote")
   }
   if(msg.content.startsWith("!hey")){
-    msg.react('❤');
     msg.reply("Hi, my gorgeous friend! type ' !inspire ' for a wonderful quote")
   }
 
