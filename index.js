@@ -18,7 +18,6 @@ const sadWords = [
 
 const starterEncouragements = [
 	'Cheer up!',
-	'Hang in there',
 	'You are a great person',
 	'Just chill Man',
 	'Everything will be okay',
@@ -63,7 +62,7 @@ client.on('message', msg => {
 	if (sadWords.some(word => msg.content.includes(word))) {
 		db.get('encouragements').then(encouragements => {
 			const encouragement =
-				encouragements[Math.floor(Math.random() * encouragements.length)];
+			  encouragements[Math.floor(Math.random() * encouragements.length)];
 			msg.reply(encouragement);
 		});
 	}
