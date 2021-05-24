@@ -41,6 +41,17 @@ const quotes = () => {
 		});
 };
 
+const gifs = (text) => {
+	return fetch(`http://api.giphy.com/v1/gifs/search?q=${text}&api_key=e3kMOkBpwi7lHXiJ2n2CkPuUtmD5yuR3&limit=1`)
+		.then(res => {
+			return res.json();
+		})
+		.then(data => {
+			return data.data[0].embed_url;
+		});
+};
+
+
 const updateEncouragements = encouragingMessage => {
 	db.get('encouragements').then(encouragements => {
 		encouragements.push([encouragingMessage]);
@@ -68,6 +79,16 @@ client.on('message', msg => {
 			msg.reply(encouragement);
 		});
 	}
+
+  if(msg.content.startsWith("!gif")){
+      const gifName = msg.content;
+      const findGif = gifName.split("!gif ")[1];
+      if(findGif !== ""){
+        gifs(findGif)
+       .then(gif => msg.channel.send(gif))
+       .catch(err => msg.channel.send("Cannot send any gif right now")) 
+      }
+  }
 
   if(msg.content.startsWith("!Hello")){
     msg.reply("Hi, my gorgeous friend! type ' !inspire ' for a wonderful quote")
