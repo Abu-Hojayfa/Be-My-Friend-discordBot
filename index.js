@@ -3,8 +3,11 @@ const client = new Discord.Client();
 const myToken = process.env['TOKEN'];
 const fetch = require('node-fetch');
 const Database = require('@replit/database');
+const myWhter = process.env['whter Api']
+const myGifi = process.env['gifi']
 const keepAlive = require('./server');
 const db = new Database();
+
 
 const sadWords = [
 	'sad',
@@ -41,8 +44,9 @@ const quotes = () => {
 		});
 };
 
+
 const gifs = (text) => {
-	return fetch(`http://api.giphy.com/v1/gifs/search?q=${text}&api_key=e3kMOkBpwi7lHXiJ2n2CkPuUtmD5yuR3&limit=1`)
+	return fetch(`http://api.giphy.com/v1/gifs/search?q=${text}&api_key=${myGifi}&limit=1`)
 		.then(res => {
 			return res.json();
 		})
@@ -50,6 +54,26 @@ const gifs = (text) => {
 			return data.data[0].embed_url;
 		});
 };
+
+const stickersApi = (sText) => {
+	return fetch(`https://api.giphy.com/v1/stickers/search?q=${sText}&api_key=${myGifi}&limit=25&offset=0&rating=g&lang=en`)
+		.then(res => {
+			return res.json();
+		})
+		.then(data => {
+			return data.data[0].embed_url;
+		});
+};
+
+const weather = (location) => {
+  return fetch(`https://api.openweathermap.org/data/2.5/weather?q=${location?location:'dhaka'}&appid=${myWhter}&units=metric`)
+  .then(res => {
+			return res.json();
+		})
+		.then(data => {
+			return data;
+		});
+}
 
 
 const updateEncouragements = encouragingMessage => {
@@ -88,6 +112,26 @@ client.on('message', msg => {
        .then(gif => msg.channel.send(gif))
        .catch(err => msg.channel.send("Cannot send any gif right now")) 
       }
+  }
+
+  
+  if(msg.content.startsWith("!sticker")){
+      const stickerName = msg.content;
+      const findSticker = stickerName.split("!sticker ")[1];
+      if(findSticker !== ""){
+        stickersApi(findSticker)
+       .then(sticker => msg.channel.send(sticker))
+       .catch(err => msg.channel.send("Cannot send any sticker right now")) 
+      }
+  }
+
+  if(msg.content.startsWith("!weather")){
+    const locationName = msg.content;
+    const findLocation = locationName.split("!weather ")[1];
+
+    weather(findLocation)
+    .then(tempData => msg.reply(`In ${findLocation?findLocation.toUpperCase():'DHAKA'}, weather is ${tempData.weather[0].description}. Current temperature is ${tempData.main.temp}°C. But feels like ${tempData.main.feels_like}°C  for  ${tempData.main.humidity}% humidity.`))
+    .catch(err => msg.channel.send("Cannot send any weather Info right now foe internal server ERROR or For your spell mistake. Hope I will Okay soon")) 
   }
 
   if(msg.content.startsWith("!Hello")){
